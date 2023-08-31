@@ -5,12 +5,15 @@ class LatestNews {
   String thirdtext;
   String? forthtext;
 
+
   LatestNews(
       {required this.image,
         required this.firsttext,
         required this.secondtext,
         required this.thirdtext,
-        this.forthtext
+        this.forthtext,
+
+
         });
 }
 

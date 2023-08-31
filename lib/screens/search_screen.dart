@@ -13,6 +13,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   bool check = false;
+  TextEditingController searchcontroller = TextEditingController();
   int selectedindex = 0;
   List Chips = ["Recommended", "Latest", "Most Viewed", "Channel", "Following"];
   List<TabModel> tabs = [
@@ -34,13 +35,20 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               children: [
                 DefaultTextFormField(
+                  check: false,
+                  suffixcolor: Color(0xff202663),
+                  controller: searchcontroller,
                   iconButton: Icons.close,
+                  suffixfunction: () {
+                    searchcontroller.clear();
+                  },
                   color: Color(0xff202663),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
@@ -51,18 +59,18 @@ class _SearchScreenState extends State<SearchScreen> {
                       },
                       icon: Icon(
                         Icons.filter_alt_outlined,
-                        color: check?Colors.white:Colors.brown,
+                        color: check ? Colors.white : Colors.brown,
                       ),
                       label: Text(
                         "Filter",
                         style: TextStyle(
-                          fontFamily: 'Nunito',
-                            color: check ? Colors.white :Colors.brown),
+                            fontFamily: 'Nunito',
+                            color: check ? Colors.white : Colors.brown),
                       ),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
                             vertical:
-                                MediaQuery.of(context).size.height * 0.014,
+                                MediaQuery.of(context).size.height * 0.012,
                             horizontal:
                                 MediaQuery.of(context).size.width * 0.05),
                         primary: check ? Color(0xffFF3A44) : Colors.white,
@@ -76,12 +84,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     Expanded(
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.066,
+                        height: MediaQuery.of(context).size.height * 0.063,
                         child: TabBar(
                           onTap: (index) {
-                          setState(() {
-                            selectedindex = index;
-                          });
+                            setState(() {
+                              selectedindex = index;
+                            });
                           },
                           physics: BouncingScrollPhysics(),
                           isScrollable: true,
@@ -91,6 +99,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                 (tabDM) => Container(
                                     width: MediaQuery.of(context).size.width *
                                         0.32,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Color(0xffF0F1FA), width: 2),
+                                        borderRadius: BorderRadius.circular(30),
+                                        color:
+                                            selectedindex == tabs.indexOf(tabDM)
+                                                ? Color(0xffFF3A44)
+                                                : Colors.white),
                                     child: Center(
                                       child: Text(tabDM.title,
                                           style: TextStyle(
@@ -100,14 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 ? Colors.white
                                                 : Colors.brown,
                                           )),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Color(0xffF0F1FA), width: 2),
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: selectedindex == tabs.indexOf(tabDM)
-                                                ? Color(0xffFF3A44)
-                                                : Colors.white)),
+                                    )),
                               )
                               .toList(),
                         ),
@@ -118,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
                 ),
-                Text.rich(TextSpan(
+                const Text.rich(TextSpan(
                     text: "About 11,130,000 Results for",
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                     children: [
@@ -145,10 +154,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           );
                         },
                       ),
-                      Text("This is technolgy  news"),
-                      Text("This is Finance  news"),
-                      Text("This is Arts  newsoda"),
-                      Text("This is Sports  news"),
+                      Center(child: Text("This is technolgy  news")),
+                      Center(child: Text("This is Finance  news")),
+                      Center(child: Text("This is Arts  newsoda")),
+                      Center(child: Text("This is Sports  news")),
                     ],
                   ),
                 )
@@ -162,7 +171,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
     return showModalBottomSheet(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20)),
         ),
@@ -179,7 +188,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Filter",
                       style: TextStyle(
                           fontSize: 22,
@@ -194,15 +203,15 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         side: BorderSide(width: 1, color: Color(0xff041E2F)),
                       ),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete_outline,
                         color: Color(0xff041E2F),
                       ),
                       onPressed: () {},
-                      label: Text(
+                      label: const Text(
                         "Reset",
                         style: TextStyle(
-                          fontFamily: 'Nunito',
+                            fontFamily: 'Nunito',
                             fontWeight: FontWeight.w600,
                             fontSize: 12,
                             color: Color(0xff041E2F)),
@@ -213,7 +222,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
-                Text(
+                const Text(
                   "Sort By",
                   style: TextStyle(
                       fontSize: 14,
@@ -227,15 +236,16 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 150, childAspectRatio: 2 / 1),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 150, childAspectRatio: 2 / 1),
                     itemBuilder: (context, index) {
                       return Chip(
                         side: BorderSide(color: Color(0xffF0F1FA), width: 2),
                         backgroundColor: Colors.white,
                         label: Text(
                           Chips[index],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
                               color: Color(0xff041E2F)),
@@ -253,7 +263,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         colors: [Color(0xffFF3A44), Color(0xffFFB3B6)]),
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Center(
+                  child: const Center(
                       child: Text(
                     "Saved",
                     style: TextStyle(

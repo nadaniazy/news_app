@@ -1,18 +1,31 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:news_app/model/lastest_new.dart';
 
 class NewDetails extends StatelessWidget {
-  const NewDetails({Key? key}) : super(key: key);
+  NewDetails({required this.latestNews});
+
+  LatestNews latestNews;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Image(
-          image: AssetImage("assets/Vector.png"),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.2,
+          height: MediaQuery.of(context).size.height * 0.2,
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [Color(0xffFF3A44), Color(0xffFF8086)],
+                begin: AlignmentDirectional.topCenter,
+                end: AlignmentDirectional.bottomCenter,
+              )),
+          child: const Image(
+            image: AssetImage("assets/Vector.png"),
+          ),
         ),
-        backgroundColor: Color(0xffFF3A44),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -22,7 +35,7 @@ class NewDetails extends StatelessWidget {
                 Stack(
                   children: [
                     Image(
-                      image: AssetImage("assets/Rectangle 60.png"),
+                      image: AssetImage("${latestNews.image}"),
                       height: MediaQuery.of(context).size.height * 0.6,
                       width: double.infinity,
                       fit: BoxFit.fill,
@@ -33,17 +46,17 @@ class NewDetails extends StatelessWidget {
                       ),
                       child: Container(
                           height: MediaQuery.of(context).size.height +
-                              MediaQuery.of(context).size.height * 0.2,
-                          decoration: BoxDecoration(
+                              MediaQuery.of(context).size.height * 0.24,
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(40),
                                 topRight: Radius.circular(40)),
                           ),
                           child: Padding(
-                            padding:
-                                const EdgeInsets.all(15.0).copyWith(top: MediaQuery.of(context).size.height*0.13),
-                            child: Text.rich(TextSpan(
+                            padding: const EdgeInsets.all(15.0).copyWith(
+                                top: MediaQuery.of(context).size.height * 0.13),
+                            child: const Text.rich(TextSpan(
                                 text: "LONDON",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
@@ -81,7 +94,9 @@ Bailey, who was formerly the chief executive of the FCA, has long been a skeptic
                           )),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: MediaQuery.of(context).size.width * 0.1,
@@ -93,7 +108,7 @@ Bailey, who was formerly the chief executive of the FCA, has long been a skeptic
                             color: Colors.grey.shade400,
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back_ios,
                             size: 17,
                           ),
@@ -116,7 +131,7 @@ Bailey, who was formerly the chief executive of the FCA, has long been a skeptic
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
+                            children: const [
                               Text(
                                 "Sunday, 9 May 2021",
                                 style: TextStyle(
@@ -129,13 +144,14 @@ Bailey, who was formerly the chief executive of the FCA, has long been a skeptic
                                 "Crypto investors should be prepared to lose all their money, BOE governor says",
                                 style: TextStyle(
                                     fontSize: 16,
+                                    fontFamily: 'DMSerifDisplay',
                                     fontWeight: FontWeight.w700,
                                     color: Color(0xff2E0505)),
                               ),
                               Text(
                                 "Published by Ryan Browne",
                                 style: TextStyle(
-                                  fontFamily: 'Nunito',
+                                    fontFamily: 'Nunito',
                                     fontWeight: FontWeight.w800,
                                     fontSize: 10,
                                     color: Color(0xff2E0505)),

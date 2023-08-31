@@ -12,6 +12,7 @@ LatestNews latestNewss;
             child: Image(
               image: AssetImage("${latestNewss.image}"),
               height: 150,
+              width: double.infinity,
               fit: BoxFit.cover,
             )),
         Padding(
@@ -24,9 +25,9 @@ LatestNews latestNewss;
               children: [
                 Text(
                   "${latestNewss.firsttext}",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
-                      fontFamily: 'New York Small',
+                      fontFamily: 'DMSerifDisplay',
                       fontWeight: FontWeight.w600,
                       fontSize: 14),
                 ),

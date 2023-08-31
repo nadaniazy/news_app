@@ -27,8 +27,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  dot_navigation_bar: ^1.0.2
   blurrycontainer: ^1.0.2
+  carousel_slider: ^4.2.1
+  simple_gradient_text: ^1.2.4
   flutter:
     sdk: flutter
 
@@ -80,6 +81,11 @@ flutter:
       fonts:
         - asset: assets/fonts/Nunito-Bold.ttf
           weight: 900
+    - family: DMSerifDisplay
+      fonts:
+        - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+          weight: 400
+
 
 
 
